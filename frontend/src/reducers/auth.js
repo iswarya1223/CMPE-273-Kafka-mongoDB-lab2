@@ -12,6 +12,7 @@ import {
   UPDATE_PROFILE_FAIL,
   UPDATE_PROFILE_RESET,
   CLEAR_ERRORS,
+  CURRENCY_SET,
 } from '../actions/types';
 const jwt_decode = require('jwt-decode');
 
@@ -114,3 +115,14 @@ export const profileReducer = (state = {}, action) => {
     }
   };
   
+  export const addCurrency = (state = {}, action) => {
+    switch (action.type) {
+      case CURRENCY_SET:
+        return {
+          ...state,
+          currency :action.payload,
+        };
+        default:
+          return state;
+      }
+    };

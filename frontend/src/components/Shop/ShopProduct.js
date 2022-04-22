@@ -49,7 +49,7 @@ const ShopProduct= ({shopproduct,history,shopname}) => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
-    const [currency, setCurrency] = useState("");
+    const {currency} = useSelector(state => state.currency);
     const [category, setCategory] = useState("");
     const [image_URL, setImage] = useState("https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true");
     console.log(shopname);    
@@ -113,7 +113,6 @@ const ShopProduct= ({shopproduct,history,shopname}) => {
       setDescription(product.description);
       setPrice(product.price);
       setStock(product.stock);
-      setCurrency(product.currency);
       setCategory(product.category);
       setImage(product.image_URL);
   }
@@ -123,13 +122,13 @@ const ShopProduct= ({shopproduct,history,shopname}) => {
     return (
       <Fragment>
       {shopproduct && shopproduct.shopname && 
-      <div className = "productCard" onClick={()=> shopproducts(shopproduct.productid)}> 
+      <div className = "productCard" onClick={()=> shopproducts(shopproduct._id)}> 
       {user && user.length && user[0].shopname === shopname ?
       ( <EditIcon onClick={(e)=> handleShow(e, shopproduct)}/> ) :''}
             {user && user.length && user[0].shopname === shopname ?
            (<Button
               onClick={(e) =>
-                deleteProductHandler(e,shopproduct.productid,shopname)
+                deleteProductHandler(e,shopproduct._id,shopname)
               }
             >
               <DeleteIcon />
@@ -137,7 +136,7 @@ const ShopProduct= ({shopproduct,history,shopname}) => {
         <p>{shopname}</p>
         <img src={shopproduct.image_URL} alt={shopproduct.productname} />
       <p>{shopproduct.productname}</p>
-      <span>{shopproduct.currency} {shopproduct.price}</span>
+      <span> {currency} {shopproduct.price} </span>
       {shopproduct.salescount ? <span><i>total sales count:</i> {shopproduct.salescount}</span> :
       <span><i>total sales count: </i>0</span>}
         </div>
@@ -195,21 +194,6 @@ const ShopProduct= ({shopproduct,history,shopname}) => {
                       onChange={(e) => setStock(e.target.value)}
                       required />
                   </div>
-                  <div className="currency">
-
-                    <select
-                      value={currency}
-                      name='currency'
-                      onChange={e => setCurrency(e.target.value)}>
-                      <option value="null">SelectCurrency</option>
-                      <option value="USD">USD DOLLAR</option>
-                      <option value="INR">INDIAN RUPEE</option>
-                      <option value="CAD">CANADIAN DOLLAR</option>
-                      <option value="euro">EUROS</option>
-                    </select>
-                  </div>
-
-
                   <div className="category">
 
                     <select
@@ -246,7 +230,7 @@ const ShopProduct= ({shopproduct,history,shopname}) => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={(e)=>updateProductSubmit(e,shopproduct.productid)}>
+            <Button variant="primary" onClick={(e)=>updateProductSubmit(e,shopproduct._id)}>
               Save Changes
             </Button>
           </Modal.Footer>

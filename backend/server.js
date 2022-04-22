@@ -30,39 +30,11 @@ var connection = mysql.createPool({
     database: constraints.DB.database
 });
 */
-var connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'etsy',
-    port: '3306',
-    user: 'root',
-    password: 'password',
-});
 
-connection.connect((err) => {
-    if(err){
-        throw 'Error occured ' + err.message;
-    }
-    //console.log("pool created");
-});
 
 app.use(express.static(__dirname + '/public'));
 
 
-app.get('/test_api',async function(req,res){
-    await connection.query('SELECT * from users', async function(error,results){
-        if(error){
-            res.writeHead(200, {
-                'Content-Type': 'text-plain'
-            });
-            res.send(error.code);
-        }else{
-            res.writeHead(200,{
-                'Content-Type': 'text/plain'
-            });
-            res.end(JSON.stringify(results));
-        }
-    });
-});
 
 // app.post('/create',async function(req,res){
 //     await connection.query(`Insert into test_table(uname,email,password)values(?,?,?)`,[req.body.uname,

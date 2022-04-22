@@ -12,6 +12,7 @@ import{
     UPDATE_PROFILE_FAIL,
     UPDATE_PROFILE_REQUEST,
     CLEAR_ERRORS,
+    CURRENCY_SET,
 } from './types';
 //import setAuthToken from '../utils/setAuthToken';
 
@@ -143,6 +144,12 @@ export const updateProfile = (email,uname,city,mobile,address,dateofbirth,countr
     }
   };
 
+  export function addUserCurrency(data) {
+    return {
+       type: CURRENCY_SET,
+       payload: data
+    }
+ }
   export const clearErrors = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
   };

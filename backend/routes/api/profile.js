@@ -26,23 +26,6 @@ const {checkAuth} = require("../../utils/passport");
 //router.get('/',(req,res) => res.send('User Route'));
 
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'etsy',
-    port: '3306',
-    user: 'root',
-    password: 'password',
-});
-
-
-connection.connect((err) => {
-    if(err){
-        throw 'Error occured ' + err;
-    }
-    //console.log("pool created");
-});
-
-
 //For route use  GET api/profile
 
 router.post('/me',(req,res) => {

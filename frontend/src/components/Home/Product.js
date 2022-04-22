@@ -49,6 +49,7 @@ const favkeyword ="undefined";
     return favid && favid.length && favid.indexOf(_id) !== -1;
   }
   const {isAuthenticated,user} = useSelector(state => state.auth);
+  const {currency} = useSelector(state => state.currency);
   const email = user && user.length && user[0].email;
   const products = (_id) => {
     history.push(`/product/${_id}`);
@@ -65,7 +66,7 @@ const favkeyword ="undefined";
       {product.salescount ? <p><b><i>sales count:</i></b> {product.salescount}</p> :
       <p><b><i>sales count:</i></b> 0</p>}
       <p><b><i>stock availability:</i></b> {product.stock}</p>
-      <span>{product.currency} {product.price}</span>
+      <span>{currency} {product.price}</span>
         </div>
     )
 }

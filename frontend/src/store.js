@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import {productsReducer,
   productDetailsReducer,
   favproductsReducer} from "./reducers/productsReducer";
-import {authReducer,profileReducer} from "./reducers/auth";
+import {authReducer,profileReducer,addCurrency} from "./reducers/auth";
 import {alert} from "./reducers/alert";
 import { cartReducer } from './reducers/cartReducer';
 import { uniqueshopReducer,createshopReducer,shopDetailsReducer,createProductReducer, updateProductReducer,shopcategory } from './reducers/shopReducer';
@@ -29,6 +29,7 @@ const reducer = combineReducers({
   getorder : orderReducer,
   favdetails : favproductsReducer,
   categorydetails: shopcategory,
+  currency : addCurrency
 });
 
 let initialState = {};

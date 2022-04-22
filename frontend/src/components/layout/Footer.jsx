@@ -5,17 +5,12 @@ import "./Footer.css";
 import { useDispatch,useSelector } from "react-redux";
 import { loadUser } from "../../actions/auth";
 import axios from 'axios';
-import { getProduct } from "../../actions/productAction";
-import { getFavDetails } from "../../actions/favoriteAction";
-
+import {addUserCurrency} from "../../actions/auth";
 
 const Footer = () => {
     const dispatch = useDispatch();
-    const { products } = useSelector((state) => state.products);
-    const {user} =useSelector((state)=>state.auth);
-    const email = user && user.length && user[0].email;
+   
     const [currency,setCurrency] = useState('USD');
-    const favkeyword="undefined";
     
     const onchangeCurrency =  (e)=>
     {
@@ -26,20 +21,8 @@ const Footer = () => {
 
     useEffect( () =>
   {
-    const body = {currency : currency}
-    console.log('currency',currency);
-    const res = axios.post(
-        '/api/profile/changecurrency',
-        body
-      )
-      if(email)
-      {
-       dispatch(loadUser()).then(()=>{
-         dispatch(getProduct()); 
-         dispatch(getFavDetails(favkeyword,email));
-      
-      });
-    }},[dispatch, currency,email]);
+    dispatch(addUserCurrency(currency));
+    },[dispatch, currency]);
    
    
   return (

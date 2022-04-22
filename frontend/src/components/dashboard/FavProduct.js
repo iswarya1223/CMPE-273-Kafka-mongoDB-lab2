@@ -29,6 +29,7 @@ const Icon = styled.div`
 const FavProduct= ({product,favkeyword,history}) => { 
 
   const dispatch= useDispatch();
+  const {currency} = useSelector(state => state.currency);
    const favoriteitems = (e,email,productid) => {
    //e.preventDefault();
     e.stopPropagation(); // USED HERE!
@@ -61,7 +62,7 @@ const FavProduct= ({product,favkeyword,history}) => {
         <img src={product.productdetails.image_URL} alt={product.productdetails.productname} />
       <p><b><i>productname:</i></b>{product.productdetails.productname}</p>
       <p><b><i>sales count:</i></b> {product.productdetails.salescount}</p>
-      <span>{product.productdetails.currency} {product.productdetails.price}</span>
+      <span>{currency} {product.productdetails.price}</span>
         </div>
     )
 }

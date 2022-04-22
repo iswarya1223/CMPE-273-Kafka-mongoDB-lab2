@@ -6,13 +6,6 @@ var mysql = require('mysql');
 auth();
 //For route use  GET api/auth
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'etsy',
-    port: '3306',
-    user: 'root',
-    password: 'password',
-});
 router.get('/authentication',checkAuth,(req,res) => 
 {
 

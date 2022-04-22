@@ -18,6 +18,7 @@ import _ from "underscore";
     const { product, loading, error } = useSelector(
         (state) => state.productDetails
       );
+      const {currency} = useSelector(state => state.currency);
     const {isAuthenticated,user} =useSelector(
       (state) => state.auth
     );
@@ -121,7 +122,7 @@ import _ from "underscore";
                 {product.salescount ? <h6><i>sales count: </i>{product.salescount}</h6> :
        <h6><i>sales count: </i>0</h6>}
                   <h6><i>stock availability: </i>{product.stock}</h6>
-                  <h1>{`${product.currency} ${product.price}`}</h1>
+                  <h1>{`${currency} ${product.price}`}</h1>
                   <div className="detailsBlock-3-1">
                     <div className="detailsBlock-3-1-1">
                       <button onClick={decreaseQuantity}>-</button>
