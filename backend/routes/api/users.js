@@ -36,20 +36,7 @@ var connection = mysql.createPool({
 });
 */
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    database: 'etsy',
-    port: '3306',
-    user: 'root',
-    password: 'password',
-});
 
-connection.connect((err) => {
-    if(err){
-        throw 'Error occured ' + err;
-    }
-    //console.log("pool created");
-});
 
 
 router.post('/', [

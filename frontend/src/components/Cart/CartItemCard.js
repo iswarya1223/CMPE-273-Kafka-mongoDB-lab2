@@ -9,6 +9,7 @@ const CartItemCard = ({item, deleteCartItems }) => {
   const {isAuthenticated,user} =useSelector(
     (state) => state.auth
   );
+  const {currency} = useSelector(state => state.currency);
   const email=user && user.length && user[0].email;
   const handleChange = (productid,giftoption) => {
     if(giftoption === true){
@@ -29,7 +30,7 @@ const CartItemCard = ({item, deleteCartItems }) => {
         <img src={item.image_URL} alt=" " />
         <div>
           <Link to={`/product/${item.product._id}`}>{item.productname}</Link>
-          <span>{`Price: ${item.product.currency} ${item.price}`}</span>
+          <span>{`Price: ${currency} ${item.price}`}</span>
           <p onClick={() => deleteCartItems(item.product._id)}>Remove</p>
         </div>
         <div>

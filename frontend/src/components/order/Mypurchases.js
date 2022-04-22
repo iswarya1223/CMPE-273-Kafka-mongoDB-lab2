@@ -22,6 +22,7 @@ export const Mypurchases = ({history}) =>
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
     const alert = useAlert();
+    const {currency} = useSelector(state => state.currency);
     useEffect(() => {
       if(email)
       {
@@ -48,7 +49,7 @@ return (
          {
                orderItems && orderItems.length ? orderItems.map(item =>
                         <ListGroup key={item._id} className="order_item">
-                          <ListGroup.Item className="order_item_heading">Date: {moment(item.orderdate).format('DD MMM YYYY')} <span className="total">Total: {item.totalprice}</span> <span className="order_id">Order ID: {item._id}</span></ListGroup.Item>
+                          <ListGroup.Item className="order_item_heading">Date: {moment(item.orderdate).format('DD MMM YYYY')} <span className="total">Total: {currency} {item.totalprice}</span> <span className="order_id">Order ID: {item._id}</span></ListGroup.Item>
                           {item.orderdetails && item.orderdetails.length ? <ListGroup.Item>
                                 <Row style={{textAlign: 'center', fontWeight: 'bold'}}>
                                     <Col xs={2}>
@@ -73,7 +74,7 @@ return (
                                     <Col xs={4} style={{color:'tomato'}}>This product wrapped as a gift <br></br> Giftmessage : {orderdetail.giftdescription} </Col> :
                                     <Col xs={4} style={{color:'black'}}>This product not selected  as a gift </Col>}
                                     <Col xs={2}>{orderdetail.quantity}</Col>
-                                    <Col xs={2}>{orderdetail.currency} {orderdetail.price * orderdetail.quantity}</Col>
+                                    <Col xs={2}>{currency} {orderdetail.price * orderdetail.quantity}</Col>
                                 </Row>
                             </ListGroup.Item>
                             )

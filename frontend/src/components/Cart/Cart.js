@@ -28,6 +28,7 @@ console.log(grosstotal);
 const onChange = e => setFormData({ ...formData, [e.target.name] : e.target.value});
 const email=user && user.length && user[0].email;
 const { cartItems } = useSelector((state) => state.cart);
+const {currency} = useSelector(state => state.currency);
 useEffect(() => {
   if (email)
   {
@@ -133,7 +134,7 @@ useEffect(() => {
                     </button>
                 </div>
                 <p className="cartSubtotal">{
-                    item.currency
+                    currency
                   } {`${
                     item.price * item.quantity
                   }`} </p>
@@ -143,7 +144,7 @@ useEffect(() => {
               <div></div>
               <div className="cartGrossProfitBox">
                 <p>Gross Total</p>
-                <p >{totalprice} </p>
+                <p >{currency} {totalprice} </p>
               </div>
               <div></div>
               <div className="checkOutBtn">

@@ -27,10 +27,11 @@ const ShopDetails = ({ history }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
       let { shopname } = useParams();
-      const{loading,shopdetails,shopsalesrevenue} = useSelector((state)=>state.shopdetail);
+      const{loading,usershopdetails,shopdetails,shopsalesrevenue} = useSelector((state)=>state.shopdetail);
       const{user} =useSelector((state) =>state.auth);
       const email =user && user.length && user[0].email;
       const {categories} = useSelector((state)=>state.categorydetails)
+      const {currency} = useSelector(state => state.currency);
       useEffect(() => {
         if(shopname)
         {
@@ -62,7 +63,7 @@ const ShopDetails = ({ history }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
-  const [currency, setCurrency] = useState("");
+ 
   const [category, setCategory] = useState("");
   const [image_URL, setImage] = useState("https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true");
   const [shopimage,setShopImage] = useState('');
@@ -107,7 +108,7 @@ const ShopDetails = ({ history }) => {
     
 
           <><Fragment>
-        {shopdetails && shopdetails.length && user && user.length &&
+        { usershopdetails && usershopdetails.length && user && user.length &&
           <div className="profileContainer">
 
             <div>
@@ -118,7 +119,7 @@ const ShopDetails = ({ history }) => {
                  <Image
                     style={{ height: 160, width: 160, marginBottom: 20 }}
                     cloudName='dj3in4dua'
-                    public_id={shopdetails[0].shopimage}/>
+                    public_id={usershopdetails[0].shopimage}/>
                     {shopname === user[0].shopname ?
                     <input
                       type='file'
@@ -138,17 +139,16 @@ const ShopDetails = ({ history }) => {
             <div>
               <div>
                 <h4> ownerName</h4>
-                <p>{shopdetails[0].uname}</p>
+                <p>{usershopdetails[0].uname}</p>
               </div>
               <div>
                 <h4>Email</h4>
-                <p>{shopdetails[0].email}</p>
+                <p>{usershopdetails[0].email}</p>
               </div>
               <div>
 
                 {shopname === user[0].shopname ? <h4>Total Sales Revenue</h4> : ''}
-                {shopsalesrevenue
-                  && shopsalesrevenue.length && shopname === user[0].shopname ? <h4>{shopsalesrevenue[0].totalsalesrevenue}</h4> : ''}
+                {shopsalesrevenue && shopname === user[0].shopname ? <h4>{shopsalesrevenue}</h4> : ''}
 
               </div>
               <div>
@@ -211,21 +211,7 @@ const ShopDetails = ({ history }) => {
                         onChange={(e) => setStock(e.target.value)}
                         required />
                     </div>
-                    <div className="currency">
-
-                      <select
-                        value={currency}
-                        name='currency'
-                        onChange={e => setCurrency(e.target.value)}>
-                        <option value="null">SelectCurrency</option>
-                        <option value="USD">USD DOLLAR</option>
-                        <option value="INR">INDIAN RUPEE</option>
-                        <option value="CAD">CANADIAN DOLLAR</option>
-                        <option value="euro">EUROS</option>
-                      </select>
-                    </div>
-
-
+          
                     <div className="category">
 
                       <select
@@ -277,7 +263,7 @@ const ShopDetails = ({ history }) => {
         </Modal>
 
       <div className="container" id="container">
-          {shopdetails &&
+          {shopdetails && 
             shopdetails.map((shopproduct) => (
               <ShopProduct shopproduct={shopproduct} history={history} shopname={shopname} />
             ))}

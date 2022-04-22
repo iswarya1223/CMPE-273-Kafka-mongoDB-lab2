@@ -29,8 +29,8 @@ const UserOptions = ({user}) => {
         }
         function shop()
         {
-          if (user && user.length && user[0].shopname === null){
-
+          if (user && user.length && user[0].shopname === undefined){
+        
           history.push("/shopcreation")}
           else  {
             history.push(`/shop/${user[0].shopname}`)

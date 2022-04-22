@@ -90,7 +90,8 @@ export const getShopAvailability =
         
         type: SHOP_DETAILS_SUCCESS,
         payload: data.results,
-        payload1: data.results1, 
+        payload2 :data.shopdetails,
+        payload1: data.totalsalesrevenue, 
       });
     } catch (error) {
       dispatch({
@@ -135,7 +136,6 @@ export const getShopAvailability =
   
       const config = { headers: {  'Content-Type': 'application/json'} };
       const productData = {
-        productid :productid,
         productname : productname,
         description : description,
         price : price,
@@ -145,7 +145,7 @@ export const getShopAvailability =
         image_URL : image_URL ,
       }
       console.log(productData);
-      const { data } = await axios.post(`/api/shopname/updateproduct`, productData, config);
+      const { data } = await axios.post(`/api/shopname/updateproduct/`+productid, productData, config);
   
       dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: data.success });
     } catch (error) {
@@ -163,7 +163,8 @@ export const getShopAvailability =
       }
   }
     const body = {
-      productid :productid,
+      _id :productid,
+      product :productid,
     }
     const body1 = JSON.stringify(body);
     console.log(body1);
