@@ -11,11 +11,10 @@ var kafka = require('../../kafka/client');
 const User = require('../../models/User');
 const Cart = require('../../models/Cart');
 const e = require('express');
-//const ApiFeatures = require("../utils/apifeatures");
 router.use(express.urlencoded({extended: true}));
 router.use(express.json())
 const connectDB = require('../../config/db');
-//var User =require('../../models/User');
+
 const config = require('config');
 connectDB();
 const {checkAuth} = require("../../utils/passport");
@@ -133,11 +132,10 @@ router.get('/getProductDetails', [
     const errors = validationResult(req);
     console.log(errors);
     if(!errors.isEmpty()){
-    //res.send(errors.code);
+
     return res.status(500).json({errors: errors.array()});
     }
     kafka.make_request('getproductdetail',req.query, function(err,results){
-        // console.log(results);
                if( results.status===400 || results.status===500){
                  res.status(results.status).json(results.message);
                   }
