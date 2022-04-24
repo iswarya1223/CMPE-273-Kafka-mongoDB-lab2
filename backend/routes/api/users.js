@@ -51,11 +51,11 @@ router.post('/', [
     kafka.make_request('register',req.body, function(err,results){
       console.log('in result');
       console.log(results);
-      if(results.status === 500 || results.status === 400){
+      if(results.status === 500 || results.status === 400 || err){
       res.send(results.message);
       }
       else{
-      res.end (results.message);
+      res.send (results.message);
       }
       
   });

@@ -32,6 +32,10 @@ export const Mypurchases = ({history}) =>
       const setCurrentPageNo = (e) => {
         setCurrentPage(e);
       };
+      const setResultsPerPageNo = (e) => {
+        setCurrentPage(1);
+        setResultsPerPage(e.target.value);
+      };
       const orderHandler = () => {
     
         history.push("/products");
@@ -72,7 +76,7 @@ return (
                                     <Col xs={2}><Link style={{color:'black'}} to ={`/product/${orderdetail.product}`}>{orderdetail.productname}</Link></Col>
                                     {orderdetail && orderdetail.giftoption === true ? 
                                     <Col xs={4} style={{color:'tomato'}}>This product wrapped as a gift <br></br> Giftmessage : {orderdetail.giftdescription} </Col> :
-                                    <Col xs={4} style={{color:'black'}}>This product not selected  as a gift </Col>}
+                                    <Col xs={4} style={{color:'black'}}>N/A</Col>}
                                     <Col xs={2}>{orderdetail.quantity}</Col>
                                     <Col xs={2}>{currency} {orderdetail.price * orderdetail.quantity}</Col>
                                 </Row>
@@ -83,11 +87,12 @@ return (
                     ) :
                     <p>No Purchases found</p>
             }
+            <p >select number of orders per page</p>
           <div className="currency">
             <select
   value={resultsperpage}
   name='orderperpage'
-  onChange={e => setResultsPerPage(e.target.value)}>
+  onChange={(e) => setResultsPerPageNo(e)}>
   <option value="null">Selectordersperpage</option>
   <option value="2">2</option>
   <option value="5">5</option>
@@ -96,7 +101,7 @@ return (
 </div>
          {resultsperpage < ordersCount && (
             <div className="paginationBox">
-              <Pagination
+              <Pagination 
                 activePage={currentPage}
                 itemsCountPerPage={resultsperpage}
                 totalItemsCount={ordersCount}
