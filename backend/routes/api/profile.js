@@ -2,31 +2,24 @@ const express = require('express');
 const router = express.Router();
 const session = require('express-session');
 var mysql = require('mysql');
-//var constraints = require("../../config.json");
+
 var cors = require('cors');
 const {check, validationResult} = require('express-validator');
-//const app = express();
+
 router.use(cors());
 var kafka = require('../../kafka/client');
 const User = require('../../models/User');
 const Cart = require('../../models/Cart');
 const e = require('express');
-//const ApiFeatures = require("../utils/apifeatures");
+
 router.use(express.urlencoded({extended: true}));
 router.use(express.json())
 const connectDB = require('../../config/db');
-//var User =require('../../models/User');
+
 const config = require('config');
 connectDB();
 const {checkAuth} = require("../../utils/passport");
 
-//app.use(express.json({extended: false}));
-
-//For route use  GET api/users
-//router.get('/',(req,res) => res.send('User Route'));
-
-
-//For route use  GET api/profile
 
 router.post('/me',(req,res) => {
     console.log("hi");
@@ -53,7 +46,7 @@ catch(err){
 
 router.post('/changeprofile'
   , async (req,res) => {
-    //console.log(req.body);
+
     const {email,uname,city,gender,dateofbirth,mobile,address,country,picture} = req.body;
     kafka.make_request('updateuserprofile',req.body, function(err,results){
         // console.log(results);
@@ -73,7 +66,7 @@ router.post('/changeprofile'
   , async (req,res) => {
     console.log(req.body);
     kafka.make_request('addgiftop',req.body, function(err,results){
-        // console.log(results);
+     
                if(results.status === 400 || results.status === 500 ){
                  res.status(results.status).json(results.message);
                   }
