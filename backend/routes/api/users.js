@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const session = require('express-session');
 var mysql = require('mysql');
-//var constraints = require("../../config.json");
+
 var cors = require('cors');
 const {check, validationResult} = require('express-validator');
-//const app = express();
+
 router.use(cors());
 const User = require('../../models/User');
 const e = require('express');
@@ -18,23 +18,9 @@ const {secret} = require('../../utils/config');
 const {auth} = require('../../utils/passport');
 auth();
 const connectDB = require('../../config/db');
-//var User =require('../../models/User');
+
 const config = require('config');
 connectDB();
-//app.use(express.json({extended: false}));
-
-//For route use  GET api/users
-//router.get('/',(req,res) => res.send('User Route'));
-
-/*
-var connection = mysql.createPool({
-    host: constraints.DB.host,
-    user:constraints.DB.username,
-    password: constraints.DB.password,
-    port: constraints.DB.port,
-    database: constraints.DB.database
-});
-*/
 
 
 
